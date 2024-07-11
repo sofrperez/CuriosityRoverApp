@@ -53,4 +53,19 @@ struct CameraService {
             }
         }.resume()
     }
+    
+    static func createSecureImageURL(camera: Camera) -> Camera{
+        var updatedCamera = camera
+        guard let imageURL = URL(string: camera.imagePath) else{
+            return camera
+        }
+        var components = URLComponents(url: imageURL, resolvingAgainstBaseURL: true)
+        if components?.scheme != "https" {
+            components?.scheme = "https"
+        }
+        if let finalImageURL = components?.url {
+            updatedCamera.imagePath = finalImageURL.absoluteString
+        }
+        return updatedCamera
+    }
 }

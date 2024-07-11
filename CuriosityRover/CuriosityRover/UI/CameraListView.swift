@@ -21,16 +21,18 @@ struct CameraListView: View {
             }
         }
         .padding()
-        List{
-            ForEach(viewModel.cameras, id: \.id) {camera in
-                VStack{
-                    Text(camera.name)
-                    AsyncImage(url: URL(string: "\(camera.imagePath)")) { image in
-                        image
-                            .resizable()
-                            .frame(width: 150, height: 150)
-                    } placeholder: {
-                        ProgressView()
+        ScrollView{
+            LazyVStack{
+                ForEach(viewModel.cameras, id: \.id) {camera in
+                    VStack{
+                        Text(camera.name)
+                        AsyncImage(url: URL(string: camera.imagePath)) { image in
+                            image
+                                .resizable()
+                                .frame(width: 150, height: 150)
+                        } placeholder: {
+                            ProgressView()
+                        }
                     }
                 }
             }

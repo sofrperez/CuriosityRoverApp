@@ -10,7 +10,7 @@ import Foundation
 class Camera {
     let id: Int
     let name: String
-    let imagePath: String
+    var imagePath: String
     let date: String
     
     enum Keys: String{

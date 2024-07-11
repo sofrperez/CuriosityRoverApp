@@ -14,7 +14,7 @@ class CameraListViewModel: ObservableObject {
         CameraService.fetchCameras(date: date) { camera in
             if let camera {
                 DispatchQueue.main.async{
-                    self.cameras = camera
+                    self.cameras = camera.map { CameraService.createSecureImageURL(camera: $0)}
                 }
             }
         }
